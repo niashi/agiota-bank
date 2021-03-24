@@ -7,7 +7,7 @@ programa {
 		
 		inteiro tipoConta
 		cadeia cpf
-		real saldo = 0
+		real saldo = 0.00
 		cadeia opcaoPoupanca
 		real debitoPoupanca
 		real creditoPoupanca
@@ -37,11 +37,20 @@ programa {
 				contaCorrente(saldo)
 				
 			} senao se (tipoConta == 3) {
+
+				cabecalho()
 				contaEspecial(saldo)
+
 			} senao se (tipoConta == 4) {
+
+				cabecalho()
 				contaEmpresa(saldo)
+				
 			} senao se (tipoConta == 5) {
+
+				cabecalho()
 				contaEstudantil(saldo)
+				
 			} senao {
 				
 				escreva("\nObrigado por escolher o AgiotaBank® e volte sempre!\n")
@@ -53,18 +62,18 @@ programa {
 	}
 
 	funcao contaPoupanca(real saldo) {
+
+		cadeia opcaoPoupanca
+		cadeia opcaoCorrente
+		real debitoPoupanca
+		real creditoPoupanca
 		
 		escreva("•CONTA POUPANÇA | [Digite (sair) para voltar ao menu]\n")
 		escreva("\nSaldo Atual: R$" + saldo + "\n")
 
 		para (inteiro x = 0; x < 10; x++) {
-
-			cadeia opcaoPoupanca
-			cadeia opcaoCorrente
-			real debitoPoupanca
-			real creditoPoupanca
 	
-			escreva("\nPor favor, insira a operação desejada:\n[Débito] / [Crédito] ")
+			escreva("\nPor favor, insira a operação desejada:\n[Débito] / [Crédito] / [Sair] ")
 			leia(opcaoPoupanca)
 
 			se (opcaoPoupanca == "Débito" ou opcaoPoupanca == "débito" ou opcaoPoupanca == "debito" 
@@ -86,14 +95,16 @@ programa {
 			} senao se (opcaoPoupanca == "Crédito" ou opcaoPoupanca == "crédito" ou opcaoPoupanca == "credito" 
 			ou opcaoPoupanca == "cred") {
 					
-				escreva("Quanto deseja adquirir? R$")
+				escreva("\nQuanto deseja adquirir? R$")
 				leia(creditoPoupanca)
 
 				saldo = credito(saldo, creditoPoupanca)
+
+				escreva("\nO novo saldo é: R$" + saldo + "\n")
 					
 			} senao se (opcaoPoupanca == "Sair" ou opcaoPoupanca == "sair") {
 					
-				escreva("Voltando ao menu...")
+				escreva("\nVoltando ao menu, mas antes...\n")
 				U.aguarde(2000)
 				pare
 					
@@ -113,12 +124,15 @@ programa {
 			
 			escreva("\nHoje é o aniversário de sua conta. O valor será corrigido em 0,05%.\n\nSeu novo saldo é: R$" +
 			((saldo * 0.05) + saldo) + "\n")
+			U.aguarde(3000)
+			limpa()
 			
 		} senao {
 			
 			escreva("\nHoje não é o aniversário de sua conta.\n")
-			escreva("\nVoltando ao menu...!\n")
+			escreva("\nVoltando ao menu...\n")
 			U.aguarde(3000)
+			limpa()
 				
 		}			
 	 }
@@ -137,7 +151,7 @@ programa {
 		
 		para (inteiro y = 0; y < 10; y++) {
 
-			escreva("\nPor favor, insira a operação desejada:\n[Débito] / [Crédito] / [Sair]")
+			escreva("\nPor favor, insira a operação desejada:\n[Débito] / [Crédito] / [Sair] ")
 			leia(opcaoCorrente)
 
 			se (opcaoCorrente == "deb" ou opcaoCorrente == "débito" ou opcaoCorrente == "Débito") {
@@ -157,7 +171,7 @@ programa {
 				}
 			} senao se (opcaoCorrente == "cred" ou opcaoCorrente == "crédito" ou  opcaoCorrente == "Crédito") {
 				
-				escreva("Quanto deseja adquirir? R$")
+				escreva("\nQuanto deseja adquirir? R$")
 				leia(creditoCorrente)
 					
 				saldo = credito(saldo, creditoCorrente)
@@ -165,7 +179,7 @@ programa {
 
 			} senao se (opcaoCorrente == "sair" ou opcaoCorrente == "s" ou opcaoCorrente == "SIM") {
 				
-				escreva("Voltando ao menu...")
+				escreva("\nVoltando ao menu, mas antes...\n")
 				U.aguarde(2000)
 				pare
 				
@@ -176,10 +190,10 @@ programa {
 			}
 		}
 			
-		escreva("Deseja solicitar um cheque? Digite S para Sim ou N para Não: ")
+		escreva("\nDeseja solicitar um cheque? [S/N] ")
 		leia(pedirTalao)
 	
-		se (pedirTalao == "S" ou pedirTalao == "sim" ou pedirTalao == "s") {
+		se (pedirTalao == "S" ou pedirTalao == "SIM" ou pedirTalao == "s" ou pedirTalao == "sim") {
 			    
 			para (inteiro x = 0; x <=3; x++) {
 
@@ -189,20 +203,24 @@ programa {
 			    	se (numeroTalao <= contadorTalao) {
 			    		
 			    		contadorTalao = contadorTalao - numeroTalao
-			    		escreva("Talão liberado\n")
-			    		escreva("Você tem direito a: ", contadorTalao, " talão(ões)")
+			    		escreva("\nTalão liberado\n")
+			    		escreva("\nVocê tem direito a: ", contadorTalao, " cheque(s).\n")
 			    		
 			    	} senao {
 			    		
-				    	escreva("Você não tem limite de talões\n")
-				    	U.aguarde(5000)
-				    	
+				    	escreva("\nVocê não tem limite de talões.\n")				    
+				    	escreva("\nVoltando ao menu...")
+				    	U.aguarde(3000)
+				    	limpa()
+				    	pare
+
 				}    		 
 			}			
 		} senao {
 				
-			escreva("Obrigado, volte sempre")
-			
+			escreva("\nVoltando ao menu...")
+			U.aguarde(3000)
+			limpa()
 		}
 	}
 
@@ -217,10 +235,12 @@ programa {
 		cadeia opcaoCred
 		cadeia opcaoEmprestimo
 		inteiro tipoConta
+
+		escreva("•CONTA ESPECIAL | [Digite (sair) para voltar ao menu]\n")
+		escreva("\nSaldo Atual: R$" + saldo + "\n")
 			
 		para (inteiro x = 0; x < 10; x++) {
-
-			escreva("•CONTA ESPECIAL | [Digite (sair) para voltar ao menu]\n")escreva("•CONTA ESPECIAL | [Digite (sair) para voltar ao menu]\n")
+			
 			escreva("\nPor favor, insira a operação desejada:\n[Débito] / [Crédito] / [Sair]")
 			leia(opcaoPoupanca)
 				
@@ -258,7 +278,7 @@ programa {
 						}
 					}
 				}
-			} senao se(opcaoPoupanca == "Credito" ou opcaoPoupanca == "crédito" ou opcaoPoupanca == "credito" 
+			} senao se (opcaoPoupanca == "Credito" ou opcaoPoupanca == "crédito" ou opcaoPoupanca == "credito" 
 			ou opcaoPoupanca == "cred") {
 					
 				escreva("\nQuanto você deseja de crédito?? R$:")
@@ -288,11 +308,13 @@ programa {
 		real debitoPoupanca
 		cadeia opcaoCred
 		cadeia opcaoEmprestimo
-			
+
+		escreva("•CONTA EMPRESA | [Digite (sair) para voltar ao menu]\n")
+		escreva("\nSaldo Atual: R$" + saldo + "\n")
+		
 		para (inteiro x = 0; x < 10; x++) {
 
-			escreva("•CONTA EMPRESA | [Digite (sair) para voltar ao menu]\n")
-			escreva("\nPor favor, insira a operação desejada:\n[Débito] / [Crédito] ")
+			escreva("\nPor favor, insira a operação desejada:\n[Débito] / [Crédito] / [Sair] ")
 			leia(opcaoPoupanca)
 
 			se (opcaoPoupanca == "Débito" ou opcaoPoupanca == "débito" ou opcaoPoupanca == "debito" 
@@ -315,43 +337,62 @@ programa {
 			} senao se (opcaoPoupanca == "Credito" ou opcaoPoupanca == "crédito" ou opcaoPoupanca == "credito" 
 			ou opcaoPoupanca == "cred") {
 					
-				escreva("\nQuanto você deseja de crédito?? R$:")
+				escreva("\nQuanto você deseja de crédito? R$:")
 				leia(pedidoCredito)
 					
 				saldo = credito(saldo, pedidoCredito)
 
-				escreva("Seu saldo atual é R$", saldo)
+				escreva("\nSeu saldo atual é R$", saldo , ".\n")
 					
-			} senao se (opcaoPoupanca == "sair" ou opcaoPoupanca == "s" ou opcaoPoupanca == "SIM") {
+			} senao se (opcaoPoupanca == "sair" ou opcaoPoupanca == "s") {
 				
-				escreva("Voltando ao menu...")
+				escreva("\nVoltando ao menu, mas antes...\n")
 				U.aguarde(2000)
 				pare
-				
-			}
-
-			escreva("\nDeseja fazer um empréstimo? Seu saldo atual é R$", saldo, "   [S/N]: ")
-			leia(opcaoEmprestimo)
-
-			se(opcaoEmprestimo == "S" ou opcaoEmprestimo == "s" ou opcaoEmprestimo == "sim") {
-				
-				escreva("Quanto você deseja de empréstimo? [limite atual R$", limiteEmprestimo, "]", " R$")
-				leia(pedidoEmprestimo)
-
-				se(pedidoEmprestimo > limiteEmprestimo) {
-					
-					escreva("Negado, seu limite não permite essa transação...")
-					
-				} senao {
-					
-					limiteEmprestimo = limiteEmprestimo - pedidoEmprestimo
-					saldo = saldo + pedidoEmprestimo
-					escreva("Parabéns, seu novo saldo é R$", saldo, " e o novo limite de empréstimo é R$", limiteEmprestimo)
-					
-				}
 			}
 		}
+
+		escreva("\nDeseja fazer um empréstimo? Seu saldo atual é R$", saldo , " [S/N]: ")
+		leia(opcaoEmprestimo)
+
+		se (opcaoEmprestimo == "S" ou opcaoEmprestimo == "s" ou opcaoEmprestimo == "SIM" ou opcaoEmprestimo == "sim") {
+				
+
+			faca {	
+	
+				escreva("\nQuanto você deseja de empréstimo? [limite atual R$", limiteEmprestimo, "]", " R$")
+				leia(pedidoEmprestimo)
+	
+				se (pedidoEmprestimo > limiteEmprestimo) {
+						
+					escreva("\nNegado, seu limite não permite essa transação...\n")
+						
+				} senao {
+						
+					limiteEmprestimo = limiteEmprestimo - pedidoEmprestimo
+					saldo = saldo + pedidoEmprestimo
+					escreva("\nParabéns, seu novo saldo é R$", saldo, " e o novo limite de empréstimo é R$", limiteEmprestimo , ".\n")
+						
+				}
+	
+				escreva("\nAinda deseja um empréstimo? [S/N] ")
+				leia(opcaoEmprestimo)
+				
+			} enquanto (opcaoEmprestimo == "S" ou opcaoEmprestimo == "s" ou opcaoEmprestimo == "SIM" ou opcaoEmprestimo == "sim")	
+					
+		} senao {
+
+			escreva("\nVoltando ao menu...")
+			U.aguarde(3000)
+			limpa()
+		}
+
+		escreva("\nVoltando ao menu...")
+		U.aguarde(3000)
+		limpa()
+		
 	}
+	
 
 	funcao contaEstudantil(real saldo) {
 		
@@ -363,11 +404,12 @@ programa {
 		real debitoPoupanca
 		cadeia opcaoCred
 		cadeia opcaoEmprestimo
-			
+
+		escreva("•CONTA ESTUDANTIL | [Digite (sair) para voltar ao menu]\n")
+		escreva("\nSaldo Atual: R$" + saldo + "\n")
+		
 		para (inteiro x = 0; x < 10; x++) {
 
-			escreva("•CONTA ESTUDANTIL| [Digite (sair) para voltar ao menu]\n")
-			escreva("\nPor favor, insira a operação desejada:\n[Débito] / [Crédito] ")
 			leia(opcaoPoupanca)
 
 			se (opcaoPoupanca == "Débito" ou opcaoPoupanca == "débito" ou opcaoPoupanca == "debito" 
@@ -524,8 +566,8 @@ programa {
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 532; 
- * @DOBRAMENTO-CODIGO = [33, 54, 125, 208, 280, 355, 429, 437, 445, 449, 453, 457, 486, 504];
+ * @POSICAO-CURSOR = 8484; 
+ * @DOBRAMENTO-CODIGO = [4, 63, 139, 226, 396, 471, 479, 487, 491, 495, 499, 528, 546];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
