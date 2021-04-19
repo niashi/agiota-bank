@@ -513,7 +513,7 @@ programa {
 		escreva("        [Carregando sistema...] \n")
 		escreva("        ")
 		
-		para (inteiro x = 0; x < 1; x++) {
+		para (inteiro x = 0; x < 23; x++) {
 	
 			escreva("█")	
 			U.aguarde(200)
@@ -566,8 +566,8 @@ programa {
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 8484; 
- * @DOBRAMENTO-CODIGO = [4, 63, 139, 226, 396, 471, 479, 487, 491, 495, 499, 528, 546];
+ * @POSICAO-CURSOR = 12296; 
+ * @DOBRAMENTO-CODIGO = [16, 4, 63, 139, 226, 300, 396, 471, 479, 487, 491, 495, 499, 528, 546];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
